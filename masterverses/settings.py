@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-mp&*kt7-wwr9d-+chbbqxn856)8v7xv5-(0*e^p_^%%of!o^^t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['masterverses-production.up.railway.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
