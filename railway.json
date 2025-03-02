@@ -1,7 +1,4 @@
 {
-    "build": {
-      "builder": "heroku/buildpacks:20"
-    },
     "deploy": {
       "startCommand": "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn masterverses.wsgi --bind 0.0.0.0:$PORT"
     }
