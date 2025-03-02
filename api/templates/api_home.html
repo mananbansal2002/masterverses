@@ -1,0 +1,92 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masterverses API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+    <h1 class="text-center mb-4">Masterverses API</h1>
+
+    <button onclick="getLocation()" class="btn btn-warning mb-3">Detect Location</button>
+
+    <form method="GET" class="card p-3 shadow-sm">
+        <h3 class="mb-3">Search Spiritual Events & Places</h3>
+
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <label for="lat">Latitude</label>
+                <input type="text" id="lat" name="lat" class="form-control" required>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <label for="lng">Longitude</label>
+                <input type="text" id="lng" name="lng" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <label for="faith">Faith</label>
+                <select id="faith" name="faith" class="form-control">
+                    <option value="">All</option>
+                    <option value="hinduism">Hinduism</option>
+                    <option value="islam">Islam</option>
+                    <option value="christianity">Christianity</option>
+                    <option value="buddhism">Buddhism</option>
+                    <option value="sikhism">Sikhism</option>
+                    <option value="jainism">Jainism</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <label for="radius">Radius (km)</label>
+                <select id="radius" name="radius" class="form-control">
+                    <option value="5">5 km</option>
+                    <option value="10" selected>10 km</option>
+                    <option value="20">20 km</option>
+                    <option value="50">50 km</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="submit" formaction="{% url 'spiritual-events' %}" class="btn btn-primary w-50 me-2">Search Events</button>
+            <button type="submit" formaction="{% url 'spiritual-places' %}" class="btn btn-success w-50">Search Places</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            getLocation();
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(setPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function setPosition(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            updateFields(lat, lng);
+        }
+
+        function showError() {
+            alert("Unable to retrieve your location. Please enter manually.");
+        }
+
+        function updateFields(lat, lng) {
+            document.getElementById("lat").value = lat;
+            document.getElementById("lng").value = lng;
+        }
+    </script>
+
+</body>
+</html>
