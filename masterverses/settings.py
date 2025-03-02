@@ -46,6 +46,8 @@ INSTALLED_APPS = [
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 CORS_ALLOW_ALL_ORIGINS = True  # Allow frontend access
 DATABASES = {
